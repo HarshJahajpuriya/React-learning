@@ -1,0 +1,16 @@
+.studentInfo {
+  display: inline-block;
+  
+}
+
+.deleteEditDiv {
+  display: inline-block;
+  position: absolute;
+  right: 0; 
+  margin-right: 12px;
+}
+
+.deleteEditDiv img {
+  width: 24px;
+  height: 24px;
+}
