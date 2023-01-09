@@ -9,7 +9,7 @@ const AppExample23 = () => {
     setTheme(ev.target.value);
   }
 
-  return (
+  return ( 
     <div className='mainContainer'>
       <h1>Example 23(A) - External CSS</h1>
       <br />

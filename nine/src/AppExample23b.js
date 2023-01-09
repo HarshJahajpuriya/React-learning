@@ -13,7 +13,7 @@ const AppExample23 = () => {
     } else if(ev.target.value === "darkTheme") {
       setTheme(styles.darkTheme)
     }
-  }
+  } 
 
   return (
     <div className={styles.mainContainer}>

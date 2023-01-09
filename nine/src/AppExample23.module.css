@@ -19,7 +19,7 @@
 
 .darkTheme {
   background: linear-gradient(to left, gray, black);
-  color: whitesmoke;
+  color: whitesmoke; 
   border: 1px solid black;
 }
 
