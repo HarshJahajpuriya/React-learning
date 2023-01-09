@@ -1,0 +1,30 @@
+.mainContainer {
+  margin: auto;
+  margin-top: 4px;
+  padding: 12px;
+  width: 500px;
+  height: 400px;
+  border: 1px solid gray
+}
+
+.mainContainer h1 {
+  text-align: center;
+}
+
+.lightTheme {
+  background: linear-gradient(to left, whitesmoke, #bbbbbb);
+  color: black;
+  border: 1px solid #bbbbbb;
+}
+
+.darkTheme {
+  background: linear-gradient(to left, gray, black);
+  color: whitesmoke;
+  border: 1px solid black;
+}
+
+.aboutMe {
+  text-align: left;
+  padding: 8px;
+  margin: 2px;
+}
