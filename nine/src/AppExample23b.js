@@ -30,7 +30,7 @@ const AppExample23 = () => {
       <AboutMeComponent theme={theme} />
     </div>
   );
-}
+} 
 
 const AboutMeComponent = ({theme}) => {
   return (
