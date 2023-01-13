@@ -1,0 +1,36 @@
+==============================================TABLES==========================================
+
+TABLE_NAME
+--------------------------------------------------------------------------------
+PLAYERS
+STUDENT_IMAGE
+STUDENT
+
+========================================DESCRIPTION OF TABLES==================================
+
+SQL> desc players;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(48)
+ TEAM_ID                                            NUMBER(38)
+
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ NAME                                      NOT NULL CHAR(25)
+ JOB_TYPE                                  NOT NULL CHAR(1)
+ COMPANY                                   NOT NULL CHAR(25)
+ SALARY                                    NOT NULL NUMBER(38)
+ SALARY_TYPE                               NOT NULL CHAR(1)
+
+
+SQL> desc student_image
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(48)
+ MONTH                                              VARCHAR2(12)
+ YEAR                                               NUMBER(38)
