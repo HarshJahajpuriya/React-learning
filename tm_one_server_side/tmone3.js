@@ -183,6 +183,38 @@ app.post('/updatePlacement', urlEncodedBodyParser, async (request, response) => 
   response.send({"success":true});
 })
 
+class StudentImageDetail {
+  constructor(id, name, month, year) {
+    this.id = id;
+    this.name = name;
+    this.month = month;
+    this.year = year;
+  }
+}
+
+app.get("/getPlacedStudentImagesDetails", async (request, response) => {
+  const connection = await oracle.getConnection({
+    user: 'hr',
+    password: 'pass',
+    connectString: 'localhost:1521/xepdb1'
+  });
+
+  let resultSet = await connection.execute(`select * from student_image`);
+  let studentImageDetails = [];
+  let id, name, month, year;
+
+  for(let row of resultSet.rows) {
+    id = row[0];
+    name = row[1];
+    month = row[2];
+    year = row[3];
+    let studentImageDetail = new StudentImageDetail(id, name, month, year);
+    studentImageDetails.push(studentImageDetail);
+  }
+  console.log(studentImageDetails);
+  response.send(studentImageDetails);
+
+})
 
 
 app.listen(5050, function (err) {

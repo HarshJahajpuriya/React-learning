@@ -27,10 +27,10 @@ SQL> desc student;
  SALARY_TYPE                               NOT NULL CHAR(1)
 
 
-SQL> desc student_image
+SQL> desc student_image;
  Name                                      Null?    Type
  ----------------------------------------- -------- ----------------------------
  ID                                        NOT NULL NUMBER(38)
- NAME                                               VARCHAR2(48)
- MONTH                                              VARCHAR2(12)
- YEAR                                               NUMBER(38)
+ NAME                                      NOT NULL VARCHAR2(48)
+ MONTH                                     NOT NULL NUMBER(38)
+ YEAR                                      NOT NULL NUMBER(38)
