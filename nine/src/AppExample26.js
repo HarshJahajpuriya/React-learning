@@ -1,6 +1,8 @@
 import React from 'react';
 import styledComponent from 'styled-components';
 
+const imageFolder = require.context("../public/students");
+
 const MONTHS = [
   "January",
   "February",
@@ -68,6 +70,8 @@ const RightPanelContainer = styledComponent.div`
   padding-left: 8px;
   height: calc(100vh - 170px);
   border-right: 2px solid gray;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 
   /* width */
@@ -100,6 +104,7 @@ const SubHeading = styledComponent.div`
 
 const PanelContentContainer = styledComponent.div`
   padding: 8px;
+  position: relative;
 `;
 
 const MonthListItemContainer = styledComponent.div`
@@ -113,6 +118,38 @@ const MonthListItemContainer = styledComponent.div`
   :hover {
     background: whitesmoke;
   }
+`;
+
+const ImageContainer = styledComponent.div`
+  display: flex;
+  margin: auto;
+  padding: 6px;
+  width: 280px;
+  height: 280px;
+  align-items: center;
+  img {
+    margin: auto;
+    max-width: 280px;
+    max-height: 280px;
+  }
+`;
+
+const ImageNavigationButtonsContainer = styledComponent.div`
+  border-top: 1px solid gray;
+  height: 60px;
+  padding: 12px;
+  margin-right: 16px;
+  text-align: center;
+  button {
+    padding: 4px;
+    cursor: pointer;
+  }
+`;
+
+const StudentNameContainer = styledComponent.div`
+  padding: 4px;
+  display: inline-block;
+  font-weight: 600;
 `;
 
 const getPlacedStudentImagesDetails = () => {
@@ -217,24 +254,49 @@ const MonthListItemComponent = (props) => {
 }
 
 const RightPanelComponent = (props) => {
-  if (props.monthAndYear) {
 
+  const [displayedStudentIndex, setDisplayedStudentIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    setDisplayedStudentIndex(0);
+  }, [props.monthAndYear])
+  
+  if (props.monthAndYear) {
     let studentsToDisplay = [];
     props.students.forEach(s => {
       if (s.monthAndYear === props.monthAndYear) {
         studentsToDisplay.push(s);
       };
     })
+    
 
-    console.log(studentsToDisplay)
+    const prevStudent = () => {
+      if (displayedStudentIndex !== 0) {
+        setDisplayedStudentIndex(displayedStudentIndex - 1);
+      }
+    }
+
+    const nextStudent = () => {
+      if (displayedStudentIndex < studentsToDisplay.length - 1) {
+        setDisplayedStudentIndex(displayedStudentIndex + 1);
+      }
+    }
+
 
     return (
-      <div style={{ flex: 3 }}>
+      <div style={{ flex: 3, display: 'flex', flexDirection: 'column' }}>
         <SubHeading>{props.monthAndYear} Selections</SubHeading>
         <RightPanelContainer>
-          <PanelContentContainer>
-
-          </PanelContentContainer>
+          <ImageContainer>
+            <img src={studentsToDisplay[displayedStudentIndex]?imageFolder("./" + studentsToDisplay[displayedStudentIndex]?.imageName).default:''} key={studentsToDisplay[displayedStudentIndex]?.imageName} />
+          </ImageContainer>
+          <ImageNavigationButtonsContainer>
+            { displayedStudentIndex>0 && <button style={{ float: 'left' }} onClick={prevStudent}>Prev</button> }
+            <StudentNameContainer>
+              {studentsToDisplay[displayedStudentIndex]?.studentName}
+            </StudentNameContainer>
+            { displayedStudentIndex<studentsToDisplay.length-1 && <button style={{ float: 'right' }} onClick={nextStudent}>Next</button> }
+          </ImageNavigationButtonsContainer>
         </RightPanelContainer>
       </div>
     );

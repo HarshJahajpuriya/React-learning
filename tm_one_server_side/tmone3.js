@@ -184,9 +184,10 @@ app.post('/updatePlacement', urlEncodedBodyParser, async (request, response) => 
 })
 
 class StudentImageDetail {
-  constructor(id, name, month, year) {
+  constructor(id, studentName, imageName, month, year) {
     this.id = id;
-    this.name = name;
+    this.studentName = studentName;
+    this.imageName = imageName;
     this.month = month;
     this.year = year;
   }
@@ -201,17 +202,17 @@ app.get("/getPlacedStudentImagesDetails", async (request, response) => {
 
   let resultSet = await connection.execute(`select * from student_image`);
   let studentImageDetails = [];
-  let id, name, month, year;
+  let id, studentName, imageName, month, year;
 
   for(let row of resultSet.rows) {
     id = row[0];
-    name = row[1];
+    imageName = row[1];
     month = row[2];
     year = row[3];
-    let studentImageDetail = new StudentImageDetail(id, name, month, year);
+    studentName = row[4];
+    let studentImageDetail = new StudentImageDetail(id, studentName, imageName, month, year);
     studentImageDetails.push(studentImageDetail);
   }
-  console.log(studentImageDetails);
   response.send(studentImageDetails);
 
 })

@@ -1,7 +1,7 @@
 import React from 'react';
 const imageFolder = require.context("../public/students");
 
-const boyImage = imageFolder("./boy.jpg");
+const boyImage = imageFolder("./boy1.jpg");
 const name = "girl1"
 const girl1 = imageFolder(`./${name}.jpg`)
 
