@@ -115,9 +115,10 @@ const MonthListItemContainer = styledComponent.div`
   cursor: pointer;
   border-bottom: 1px solid gray;
   box-shadow: 0 0 4px gray;
+  background: ${(wrapper) => wrapper.selected?'gray':'white'};
   :hover {
     background: whitesmoke;
-  }
+  };
 `;
 
 const ImageContainer = styledComponent.div`
@@ -202,6 +203,8 @@ const AppExample26 = () => {
 
 const LeftPanelComponent = (props) => {
 
+  const [selectedMaY, setSelectedMaY] = React.useState(false);
+
   // Sorting students selection wise
   props.students.sort((s1, s2) => new Date(s1.year, s1.month) - new Date(s2.year, s2.month));
 
@@ -219,6 +222,7 @@ const LeftPanelComponent = (props) => {
   set.forEach(s => { months.push(s) })
 
   const selected = (mAy) => {
+    setSelectedMaY(mAy);
     props.monthAndYearSelected(mAy)
   }
 
@@ -230,7 +234,7 @@ const LeftPanelComponent = (props) => {
           {
             months.map(m => {
               return (
-                <MonthListItemComponent mAySelected={selected} monthAndYear={m} key={m} />
+                <MonthListItemComponent selected={selectedMaY} mAySelected={selected} monthAndYear={m} key={m} />
               );
             })
           }
@@ -241,12 +245,13 @@ const LeftPanelComponent = (props) => {
 }
 
 const MonthListItemComponent = (props) => {
+  const isSelected = props.selected === props.monthAndYear;
   const doSomething = (ev) => {
     props.mAySelected(ev.currentTarget.id)
   }
   return (
-    <div onClick={doSomething} id={props.monthAndYear}>
-      <MonthListItemContainer>
+    <div onClick={doSomething} id={props.monthAndYear} className="listItem">
+      <MonthListItemContainer selected={isSelected}>
         {props.monthAndYear}
       </MonthListItemContainer>
     </div>
