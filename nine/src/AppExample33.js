@@ -15,7 +15,7 @@ const lookAndFeel = () => {
 const AppExample33 = ({ classes }) => {
   return (
     <div className={classes.mainContainer}>
-      <h1>Example 33 - @material-ui using withStyles with default statement</h1>
+      <h1>Example 33 - @material-ui using withStyles with export default statement</h1>
     </div>
   )
 }
