@@ -60,7 +60,7 @@ const HomeComponent = withStyles(myStyles)(({ classes }) => {
           keepMounted
           anchorEl={menuAnchor}
           open={Boolean(menuAnchor)}
-          onClose={hideMenu}
+          onClose={hideMenu} 
         >
           <MenuItem component={Link} to="/courses">Courses</MenuItem>
           <MenuItem component={Link} to="/contactus">Contact Us</MenuItem>

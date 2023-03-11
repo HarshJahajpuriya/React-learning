@@ -16,7 +16,7 @@ const AppExample35 = () => {
 const HomeComponent = () => {
   return (
     <div>
-      <h1>Example 35 - react-router-dom (Link Component)</h1>
+      <h1>Example 35 - react-router-dom (Link Component)</h1> 
       <br />
       <div style={{margin: 'auto'}}>
         <Link to="/courses">Courses</Link>
