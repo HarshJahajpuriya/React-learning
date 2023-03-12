@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Link, BrowserRouter, Routes} from 'react-router-dom';
+import { Route, Link, BrowserRouter, Routes } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Menu from '@material-ui/core/Menu';
@@ -7,14 +7,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import {withStyles} from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 
-const myStyles = () => {
+const myStyles = (theme) => {
   return ({
-    appBarSpacer : {
-      margin : '120px',
-    },
+    appBarSpacer: theme.mixins.toolbar,
     title: {
       color: 'gray',
       fontWeight: '400',
@@ -23,7 +21,7 @@ const myStyles = () => {
   })
 }
 
-const AppExample36 = withStyles(myStyles)(({classes}) => {
+const AppExample36 = withStyles(myStyles)(({ classes }) => {
   return (
     <BrowserRouter>
       <Routes>
@@ -35,8 +33,7 @@ const AppExample36 = withStyles(myStyles)(({classes}) => {
   );
 })
 
-const HomeComponent = withStyles(myStyles)(({ classes }) => {
-
+const AppBarComponent = withStyles(myStyles)((props) => {
   const [menuAnchor, setMenuAnchor] = React.useState(null);
 
   const showMenu = (ev) => {
@@ -48,113 +45,69 @@ const HomeComponent = withStyles(myStyles)(({ classes }) => {
   }
 
   return (
-    <div className={classes.appBarSpacer}>
+    <div className={props.classes.appBarSpacer}>
       <AppBar>
         <Toolbar>
           <IconButton color='inherit' onClick={showMenu}>
             <MenuIcon />
           </IconButton>
-          <Typography>Example 37 - react-router-dom with @material-ui components</Typography>
+          <Typography>Example 37 - react-router-dom with @material-ui components - ({props.heading})</Typography>
         </Toolbar>
         <Menu
           keepMounted
           anchorEl={menuAnchor}
           open={Boolean(menuAnchor)}
-          onClose={hideMenu} 
+          onClose={hideMenu}
         >
-          <MenuItem component={Link} to="/courses">Courses</MenuItem>
-          <MenuItem component={Link} to="/contactus">Contact Us</MenuItem>
+          {props.heading!=='Home' && <MenuItem component={Link} to="/">Home</MenuItem> }
+          {props.heading!=='Courses' && <MenuItem component={Link} to="/courses">Courses</MenuItem> }
+          {props.heading!=='Contact Us' && <MenuItem component={Link} to="/contactus">Contact Us</MenuItem> }
         </Menu>
       </AppBar>
+    </div>
+  );
+})
+
+const HomeComponent = withStyles(myStyles)(({ classes }) => {
+
+  return (
+    <div >
+      <AppBarComponent heading="Home" />
       <Grid container justify='center'>
-        <Grid item xs={2}><div className={classes.title}>Welcome</div></Grid>        
+        <Grid item xs={2}><div className={classes.title}>Welcome</div></Grid>
       </Grid>
     </div>
   );
 })
 
-const CoursesComponent = withStyles(myStyles)(({classes}) => {
-
-  const [menuAnchor, setMenuAnchor] = React.useState(null);
-
-  const showMenu = (ev) => {
-    setMenuAnchor(ev.currentTarget)
-  }
-
-  const hideMenu = (ev) => {
-    setMenuAnchor(null);
-  }
-
+const CoursesComponent = withStyles(myStyles)(({ classes }) => {
   return (
-
-    <div className={classes.appBarSpacer}>
-      <AppBar>
-        <Toolbar>
-          <IconButton color='inherit' onClick={showMenu}>
-            <MenuIcon />
-          </IconButton>
-          <Typography>Example 37 - react-router-dom with @material-ui components</Typography>
-        </Toolbar>
-        <Menu
-          keepMounted
-          anchorEl={menuAnchor}
-          open={Boolean(menuAnchor)}
-          onClose={hideMenu} 
-        >
-          <MenuItem component={Link} to="/courses">Courses</MenuItem>
-          <MenuItem component={Link} to="/contactus">Contact Us</MenuItem>
-        </Menu>
-      </AppBar>
+    <div >
+      <AppBarComponent heading="Courses" />
       <Grid container justify='center'>
-        <Grid item xs={2}><div className={classes.title}>Courses</div></Grid>        
+        <Grid item xs={2}><div className={classes.title}>Courses</div></Grid>
       </Grid>
       <br />
       <Link to="/">Home</Link>
     </div>
-   
+
   );
 })
 
-const ContactUsComponent = withStyles(myStyles)(({classes}) => {
-  
-  const [menuAnchor, setMenuAnchor] = React.useState(null);
-
-  const showMenu = (ev) => {
-    setMenuAnchor(ev.currentTarget)
-  }
-
-  const hideMenu = (ev) => {
-    setMenuAnchor(null);
-  }
-
+const ContactUsComponent = withStyles(myStyles)(({ classes }) => {
 
   return (
-    
-    <div className={classes.appBarSpacer}>
-    <AppBar>
-      <Toolbar>
-        <IconButton color='inherit' onClick={showMenu}>
-          <MenuIcon />
-        </IconButton>
-        <Typography>Example 37 - react-router-dom with @material-ui components</Typography>
-      </Toolbar>
-      <Menu
-        keepMounted
-        anchorEl={menuAnchor}
-        open={Boolean(menuAnchor)}
-        onClose={hideMenu} 
-      >
-        <MenuItem component={Link} to="/courses">Courses</MenuItem>
-        <MenuItem component={Link} to="/contactus">Contact Us</MenuItem>
-      </Menu>
-    </AppBar>
-    <Grid container justify='center'>
-      <Grid item xs={2}><div className={classes.title}>Contact Us</div></Grid>        
-    </Grid>
-    <br />
-    <Link to="/">Home</Link>
-  </div>
- 
+
+
+    <div >
+      <AppBarComponent heading="Contact Us" />
+      <Grid container justify='center'>
+        <Grid item xs={2}><div className={classes.title}>Contact Us</div></Grid>
+      </Grid>
+      <br />
+      <Link to="/">Home</Link>
+    </div>
+
   );
 })
 
